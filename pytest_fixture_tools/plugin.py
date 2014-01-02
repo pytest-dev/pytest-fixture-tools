@@ -7,11 +7,11 @@ from collections import defaultdict
 def pytest_addoption(parser):
     group = parser.getgroup("general")
     group.addoption('--show-fixture-duplicates',
-               action="store_true", dest="show_fixture_duplicates", default=False,
-               help="show list of duplicates from available fixtures")
+                    action="store_true", dest="show_fixture_duplicates", default=False,
+                    help="show list of duplicates from available fixtures")
     group.addoption('--fixture',
-               action="store", type=str, dest="fixture_name", default='',
-               help="Name of specific fixture for which you want to get duplicates")
+                    action="store", type=str, dest="fixture_name", default='',
+                    help="Name of specific fixture for which you want to get duplicates")
 
 
 def pytest_cmdline_main(config):
@@ -56,17 +56,17 @@ def _show_fixture_duplicates_main(config, session):
 
     def print_duplicates(argname, fixtures, currentargname=None):
         if len(fixtures) > 1:
-            fixtures = sorted(fixtures, cmp=lambda x, y: cmp(x[2], y[2]))
+            fixtures = sorted(fixtures, key=lambda key: key[2])
             for baseid, module, bestrel, fixturedef in fixtures:
                 if currentargname != argname:
                     if not module.startswith("_pytest."):
                         tw.line()
-                        tw.sep("-", "%s" %(argname,))
+                        tw.sep("-", argname)
                         currentargname = argname
                 if verbose <= 0 and argname[0] == "_":
                     continue
                 if verbose > 0:
-                    funcargspec = "{bestrel}".format(bestrel=bestrel)
+                    funcargspec = bestrel
                 else:
                     funcargspec = argname
                 tw.line(funcargspec, green=True)
@@ -75,7 +75,7 @@ def _show_fixture_duplicates_main(config, session):
     if fixture_name:
         print_duplicates(fixture_name, available[fixture_name])
     else:
-        available = sorted([(key, items) for key, items in available.items()], cmp=lambda x, y: cmp(x[0], y[0]))
+        available = sorted([(key, items) for key, items in available.items()], key=lambda key: key[0])
 
         for argname, fixtures in available:
             print_duplicates(argname, fixtures)
