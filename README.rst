@@ -31,7 +31,9 @@ With ``--show-fixture-duplicates`` you can use ``--fixture name_of_fixture`` opt
 
     py.test tests/ --show-fixture-duplicates --fixture order
 
-    # output
+Output can look like this:
+
+.. sourcecode::
     ============================================================================================ test session starts ============================================================================================
     platform linux2 -- Python 2.7.3 -- pytest-2.5.1 -- /home/batman/.virtualenvs/arkham-city/bin/python
     Tests are shuffled using seed number 355495648184.
