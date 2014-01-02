@@ -10,7 +10,7 @@ verbose = 1
 
 
 def pytest_addoption(parser):
-    """Pytest commandline hook which register argparse-style options and ini-style config values."""
+    """Add commandline options show-fixture-duplicates and fixture."""
     group = parser.getgroup("general")
     group.addoption('--show-fixture-duplicates',
                     action="store_true", dest="show_fixture_duplicates", default=False,
@@ -21,8 +21,7 @@ def pytest_addoption(parser):
 
 
 def pytest_cmdline_main(config):
-    """Pytest commandline hook which called for performing the main command line action. The default
-    implementation will invoke the configure hooks and runtest_mainloop."""
+    """Check show_fixture_duplicates option to show fixture duplicates."""
     if config.option.show_fixture_duplicates:
         show_fixture_duplicates(config)
         return 0
