@@ -34,14 +34,15 @@ With ``--show-fixture-duplicates`` you can use ``--fixture name_of_fixture`` opt
 Output can look like this:
 
 .. sourcecode::
-    ============================================================================================ test session starts ============================================================================================
+
+    ========================================== test session starts ==========================================
     platform linux2 -- Python 2.7.3 -- pytest-2.5.1 -- /home/batman/.virtualenvs/arkham-city/bin/python
     Tests are shuffled using seed number 355495648184.
     cachedir: /home/batman/.virtualenvs/arkham-city/.cache
     plugins: fixture-tools, random, bdd-splinter, pep8, cov, contextfixture, bdd, xdist, instafail, cache
     collected 2347 items / 1 skipped
 
-    --------------------------------------------------------------------------------------------------- order ---------------------------------------------------------------------------------------------------
+    ------------------------------------------------- order -------------------------------------------------
     tests/fixtures/order.py:30
     tests/unit/api/conftest.py:261
 
