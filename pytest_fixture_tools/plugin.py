@@ -1,10 +1,16 @@
+"""Pytest fixture tools plugin."""
+
 import py
 
 from _pytest.python import getlocation
 from collections import defaultdict
 
+tw = py.io.TerminalWriter()
+verbose = 1
+
 
 def pytest_addoption(parser):
+    """Pytest commandline hook which register argparse-style options and ini-style config values."""
     group = parser.getgroup("general")
     group.addoption('--show-fixture-duplicates',
                     action="store_true", dest="show_fixture_duplicates", default=False,
@@ -15,28 +21,53 @@ def pytest_addoption(parser):
 
 
 def pytest_cmdline_main(config):
+    """Pytest commandline hook which called for performing the main command line action. The default
+    implementation will invoke the configure hooks and runtest_mainloop."""
     if config.option.show_fixture_duplicates:
         show_fixture_duplicates(config)
         return 0
 
 
 def show_fixture_duplicates(config):
+    """Wrap pytest session to show duplicates."""
     from _pytest.main import wrap_session
     return wrap_session(config, _show_fixture_duplicates_main)
 
 
+def print_duplicates(argname, fixtures, previous_argname):
+    """Print duplicates with TerminalWriter."""
+    if len(fixtures) > 1:
+        fixtures = sorted(fixtures, key=lambda key: key[2])
+
+        for baseid, module, bestrel, fixturedef in fixtures:
+
+            if previous_argname != argname:
+                tw.line()
+                tw.sep("-", argname)
+                previous_argname = argname
+
+            if verbose <= 0 and argname[0] == "_":
+                continue
+
+            funcargspec = bestrel
+
+            tw.line(funcargspec)
+
+
 def _show_fixture_duplicates_main(config, session):
+    """Prepearint fixture duplicates for output."""
     session.perform_collect()
     curdir = py.path.local()
 
-    tw = py.io.TerminalWriter()
-    verbose = config.getvalue("verbose")
-
     fm = session._fixturemanager
 
+    fixture_name = config.option.fixture_name
     available = defaultdict(list)
+    arg2fixturedefs = ([fixture_name]
+                       if fixture_name and fixture_name in fm._arg2fixturedefs
+                       else fm._arg2fixturedefs)
     for item in session.items:
-        for argname in fm._arg2fixturedefs:
+        for argname in arg2fixturedefs:
             fixturedefs = fm.getfixturedefs(argname, item.nodeid)
             assert fixturedefs is not None
             if not fixturedefs:
@@ -51,31 +82,15 @@ def _show_fixture_duplicates_main(config, session):
                     curdir.bestrelpath(loc),
                     fixturedef
                 )
-                if fixture not in available[argname]:
+                if fixture[2] not in [f[2] for f in available[argname]]:
                     available[argname].append(fixture)
 
-    def print_duplicates(argname, fixtures, currentargname=None):
-        if len(fixtures) > 1:
-            fixtures = sorted(fixtures, key=lambda key: key[2])
-            for baseid, module, bestrel, fixturedef in fixtures:
-                if currentargname != argname:
-                    if not module.startswith("_pytest."):
-                        tw.line()
-                        tw.sep("-", argname)
-                        currentargname = argname
-                if verbose <= 0 and argname[0] == "_":
-                    continue
-                if verbose > 0:
-                    funcargspec = bestrel
-                else:
-                    funcargspec = argname
-                tw.line(funcargspec, green=True)
-
-    fixture_name = config.option.fixture_name
     if fixture_name:
-        print_duplicates(fixture_name, available[fixture_name])
+        print_duplicates(fixture_name, available[fixture_name], None)
     else:
         available = sorted([(key, items) for key, items in available.items()], key=lambda key: key[0])
 
+        previous_argname = None
         for argname, fixtures in available:
-            print_duplicates(argname, fixtures)
+            print_duplicates(argname, fixtures, previous_argname)
+            previous_argname = argname
