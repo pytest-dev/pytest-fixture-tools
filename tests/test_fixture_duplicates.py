@@ -1,3 +1,4 @@
+"""Test for checking getting of duplicates."""
 import py
 
 
