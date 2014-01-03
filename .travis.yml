@@ -1,0 +1,15 @@
+language: python
+# command to install dependencies
+install:
+  - pip install virtualenv==1.10
+  - pip install python-coveralls
+# # command to run tests
+script: python setup.py test
+after_success:
+  - pip install -r requirements-testing.txt -e .
+  - py.test --cov=pytest_fixture_tools --cov-report=term-missing tests
+  - coveralls
+notifications:
+    email:
+        - anatoly.bubenkov@paylogic.com
+        - andrey.makhnach@paylogic.com
