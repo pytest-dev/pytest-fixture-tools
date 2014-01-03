@@ -13,9 +13,11 @@ lib64/
 parts/
 sdist/
 var/
+include/
 *.egg-info/
 .installed.cfg
 *.egg
+.Python
 
 # Installer logs
 pip-log.txt
