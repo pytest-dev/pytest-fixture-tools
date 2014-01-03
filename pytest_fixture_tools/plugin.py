@@ -54,7 +54,7 @@ def print_duplicates(argname, fixtures, previous_argname):
 
 
 def _show_fixture_duplicates_main(config, session):
-    """Prepearint fixture duplicates for output."""
+    """Preparing fixture duplicates for output."""
     session.perform_collect()
     curdir = py.path.local()
 
