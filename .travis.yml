@@ -1,8 +1,8 @@
 language: python
 # command to install dependencies
 install:
-  - virtualenv .
-  - bin/pip install python-coveralls
+  - virtualenv . --no-pip
+  - bin/easy_intall python-coveralls
 # # command to run tests
 script: bin/python setup.py test
 after_success:
