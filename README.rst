@@ -1,14 +1,14 @@
+pytest-fixture-tools: Pytest fixture tools plugin
+===============================================================
+
+The ``pytest-fixture-tools`` package is a pytest plugin which provides various tools for fixture.
+
 .. image:: https://api.travis-ci.org/paylogic/pytest-fixture-tools.png
    :target: https://travis-ci.org/paylogic/pytest-fixture-tools
 .. image:: https://pypip.in/v/pytest-fixture-tools/badge.png
    :target: https://crate.io/packages/pytest-fixture-tools/
 .. image:: https://coveralls.io/repos/paylogic/pytest-fixture-tools/badge.png?branch=master
    :target: https://coveralls.io/r/paylogic/pytest-fixture-tools
-
-pytest-fixture-tools: Pytest fixture tools plugin
-===============================================================
-
-The ``pytest-fixture-tools`` package is a pytest plugin which provides various tools for fixture.
 
 
 Installation
@@ -52,6 +52,7 @@ Contact
 
 If you have questions, bug reports, suggestions, etc. please create an issue on
 the `GitHub project page <http://github.com/paylogic/pytest-fixture-tools>`_.
+
 
 License
 -------
