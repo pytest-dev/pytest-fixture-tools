@@ -25,6 +25,7 @@ Usage
 If you have already installed ``pytest-fixture-tools`` plugin then you can use one of its commands.
 
 ``--show-fixture-duplicates`` - will collect all fixtures and print you a list of duplicates for each fixture.
+
 With ``--show-fixture-duplicates`` you can use ``--fixture name_of_fixture`` option to get list of duplicates only for specific fixture
 
 .. sourcecode::
