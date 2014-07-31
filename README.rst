@@ -1,5 +1,5 @@
 pytest-fixture-tools: Pytest fixture tools plugin
-===============================================================
+=================================================
 
 The ``pytest-fixture-tools`` package is a pytest plugin which provides various tools for fixture.
 
@@ -60,6 +60,6 @@ License
 
 This software is licensed under the `MIT license <http://en.wikipedia.org/wiki/MIT_License>`_
 
-See `<LICENSE.txt>`_
+See `License <https://github.com/paylogic/pytest-fixture-tools/blob/master/LICENSE.txt>`_
 
 © 2013 Paylogic International.
