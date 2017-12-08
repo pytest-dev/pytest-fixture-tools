@@ -52,7 +52,7 @@ setup(
     ] + [('Programming Language :: Python :: %s' % x) for x in '2.6 2.7 3.0 3.1 3.2 3.3'.split()],
     cmdclass={'test': ToxTestCommand},
     install_requires=[
-        'pytest',
+        'pytest', 'pydot'
     ],
     # the following makes a plugin available to py.test
     entry_points={

@@ -47,6 +47,49 @@ Output can look like this:
     tests/fixtures/order.py:30
     tests/unit/api/conftest.py:261
 
+You can also generate the usage fixture graph like that:
+
+.. sourcecode::
+    pytest --fixture-graph -s
+
+The Output would be like that:
+
+.. sourcecode::
+   ============================= test session starts =============================
+   platform win32 -- Python 2.7.10, pytest-3.3.1, py-1.5.2, pluggy-0.6.0
+   rootdir: C:\Users\ifruchte\Projects\pytest-fixture-tools, inifile: tox.ini
+   plugins: pep8-1.0.6, cov-2.5.1, fixture-tools-1.0.0
+   collected 7 items
+
+   pytest_fixture_tools\__init__.py .                                       [ 14%]
+   pytest_fixture_tools\plugin.py .                                         [ 28%]
+   tests\__init__.py .                                                      [ 42%]
+   tests\conftest.py .                                                      [ 57%]
+   tests\test_fixture_duplicates.py .
+   -------------------------------- fixture-graph --------------------------------
+   created at artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.dot.
+   You can convert it to a PNG using 'dot -Tpng artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.dot -o artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.png'
+   ============================= test session starts =============================
+   platform win32 -- Python 2.7.10, pytest-3.3.1, py-1.5.2, pluggy-0.6.0
+   rootdir: c:\users\ifruchte\appdata\local\temp\pytest-of-ifruchte\pytest-445\test_there_are_not_fixture_duplicates0, inifile:
+   plugins: pep8-1.0.6, cov-2.5.1, fixture-tools-1.0.0
+   collected 2 items
+
+   ======================== no tests ran in 0.06 seconds =========================
+   .s                                     [100%]
+
+   ===================== 6 passed, 1 skipped in 0.29 seconds =====================
+
+And running the hinted command:
+
+.. sourcecode::
+    dot -Tpng artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.dot -o artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.png
+
+would provide this output, that can help under a test that depend on large amount of fixtures:
+
+.. image:: imgs/graph_example.png
+    :alt: alternate text
+    :align: right
 
 Contact
 -------
