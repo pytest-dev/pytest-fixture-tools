@@ -29,7 +29,6 @@ def test_there_are_not_fixture_duplicates(testdir):
     assert result.stdout.lines.count('arg1') == 0
 
 
-@pytest.mark.skip(reason="py.io.TerminalWriter() isn't captured by testdir anymore")
 def test_there_are_fixture_duplicates(testdir):
     """Check that --show-fixture-duplicates will give us list of duplicates."""
     sub1 = testdir.mkpydir("sub1")
@@ -51,7 +50,7 @@ def test_there_are_fixture_duplicates(testdir):
     sub1.join("test_in_sub1.py").write("def test_1(arg1): pass")
     sub2.join("test_in_sub2.py").write("def test_2(arg1): pass")
 
-    result = testdir.runpytest('--show-fixture-duplicates')
+    result = testdir.runpytest_subprocess('--show-fixture-duplicates', '-s')
 
-    assert result.stdout.lines.count('sub1/conftest.py:5') == 1
-    assert result.stdout.lines.count('sub1/sub2/conftest.py:5') == 1
+    result.stdout.fnmatch_lines('sub1/conftest.py:5')
+    result.stdout.fnmatch_lines('sub1/sub2/conftest.py:5')
