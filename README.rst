@@ -22,6 +22,9 @@ Installation
 Usage
 -----
 
+show-fixture-duplicates
+***********************
+
 If you have already installed ``pytest-fixture-tools`` plugin then you can use one of its commands.
 
 ``--show-fixture-duplicates`` - will collect all fixtures and print you a list of duplicates for each fixture.
@@ -47,16 +50,27 @@ Output can look like this:
     tests/fixtures/order.py:30
     tests/unit/api/conftest.py:261
 
-You can also generate the usage fixture graph like that:
+fixture-graph
+*************
 
-.. sourcecode::
+You can generate the usage fixture graph like that:
+
+.. sourcecode:: bash
+
     # on windows gitbash as example
     export PATH=$PATH:/c/Program\ Files\ \(x86\)/Graphviz2.38/bin/
     pytest --fixture-graph -s
 
-The Output would be like that:
+    # or you can select the output direcotry like that:
+    pytest --fixture-graph --fixture-graph-output-dir=./test_output
+
+    # you can also change the output type of the graphs (any of graphvis supported outputs types):
+    pytest --fixture-graph --fixture-graph-type=jpg
+
+The output would be like that:
 
 .. sourcecode::
+
    ============================= test session starts =============================
    platform win32 -- Python 2.7.10, pytest-3.3.1, py-1.5.2, pluggy-0.6.0
    rootdir: C:\Users\ifruchte\Projects\pytest-fixture-tools, inifile: tox.ini
@@ -81,11 +95,10 @@ The Output would be like that:
 
    ===================== 6 passed, 1 skipped in 0.29 seconds =====================
 
-would provide this output, that can help under a test that depend on large amount of fixtures:
+Final output, that can help with tests that depend on large amount of fixtures:
 
 .. image:: imgs/graph_example.png
     :alt: alternate text
-    :align: right
 
 Contact
 -------
