@@ -50,6 +50,8 @@ Output can look like this:
 You can also generate the usage fixture graph like that:
 
 .. sourcecode::
+    # on windows gitbash as example
+    export PATH=$PATH:/c/Program\ Files\ \(x86\)/Graphviz2.38/bin/
     pytest --fixture-graph -s
 
 The Output would be like that:
@@ -67,8 +69,7 @@ The Output would be like that:
    tests\conftest.py .                                                      [ 57%]
    tests\test_fixture_duplicates.py .
    -------------------------------- fixture-graph --------------------------------
-   created at artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.dot.
-   You can convert it to a PNG using 'dot -Tpng artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.dot -o artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.png'
+   created artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_fixture_duplicates.png.
    ============================= test session starts =============================
    platform win32 -- Python 2.7.10, pytest-3.3.1, py-1.5.2, pluggy-0.6.0
    rootdir: c:\users\ifruchte\appdata\local\temp\pytest-of-ifruchte\pytest-445\test_there_are_not_fixture_duplicates0, inifile:
@@ -79,11 +80,6 @@ The Output would be like that:
    .s                                     [100%]
 
    ===================== 6 passed, 1 skipped in 0.29 seconds =====================
-
-And running the hinted command:
-
-.. sourcecode::
-    dot -Tpng artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.dot -o artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_not_fixture_duplicates.png
 
 would provide this output, that can help under a test that depend on large amount of fixtures:
 

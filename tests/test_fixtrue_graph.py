@@ -24,12 +24,5 @@ def test_fixture_graph_created(testdir):
 
     result = testdir.runpytest_subprocess('--fixture-graph', '-s')
 
-    result.stdout.fnmatch_lines("created at artifacts/fixture-graph-sub1-test_in_sub1.py__test_1.dot.")
-    result.stdout.fnmatch_lines("You can convert it to a PNG using 'dot -Tpng artifacts/fixture-graph-sub1"
-                                "-test_in_sub1.py__test_1.dot -o artifacts/fixture-graph-sub1-test_in_sub1"
-                                ".py__test_1.png'")
-
-    result.stdout.fnmatch_lines("created at artifacts/fixture-graph-sub1-sub2-test_in_sub2.py__test_2.dot.")
-    result.stdout.fnmatch_lines("You can convert it to a PNG using 'dot -Tpng artifacts/fixture-graph-sub1"
-                                "-sub2-test_in_sub2.py__test_2.dot -o artifacts/fixture-graph-sub1-sub2-te"
-                                "st_in_sub2.py__test_2.png'")
+    result.stdout.fnmatch_lines("created artifacts/fixture-graph-sub1-test_in_sub1.py__test_1.dot.")
+    result.stdout.fnmatch_lines('created artifacts/fixture-graph-sub1-sub2-test_in_sub2.py__test_2.dot.')

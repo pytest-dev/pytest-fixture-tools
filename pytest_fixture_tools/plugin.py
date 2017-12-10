@@ -32,9 +32,16 @@ def pytest_addoption(parser):
     group.addoption('--fixture',
                     action="store", type=str, dest="fixture_name", default='',
                     help="Name of specific fixture for which you want to get duplicates")
+
     group.addoption('--fixture-graph',
                     action="store_true", dest="fixture_graph", default=False,
                     help="create .dot fixture graph for each test")
+    group.addoption('--fixture-graph-output-dir',
+                    action="store_true", dest="fixture_graph_output_dir", default="artifacts",
+                    help="select the location for the output of fixture graph. defaults to 'artifacts'")
+    group.addoption('--fixture-graph-output-type',
+                    action="store_true", dest="fixture_graph_output_type", default="png",
+                    help="select the type of the output for the fixture graph. defaults to 'png'")
 
 
 def pytest_cmdline_main(config):
@@ -138,11 +145,17 @@ def pytest_runtest_setup(item):
                 edge = pydot.Edge(node, i)
                 graph.add_edge(edge)
 
-        log_dir = os.environ.get('LOG_DEST_DIR', 'artifacts')
+        log_dir = item.config.option.fixture_graph_output_dir
+        output_type = item.config.option.fixture_graph_output_type
         mkdir_recursive(log_dir)
         filename = "{0}/fixture-graph-{1}".format(log_dir, item._nodeid.replace(":", "_").replace("/", "-"))
-        graph.write(filename + ".dot")
         tw.line()
         tw.sep("-", "fixture-graph")
-        tw.line("created at {}.dot.".format(filename))
-        tw.line("You can convert it to a PNG using 'dot -Tpng {0}.dot -o {0}.png'".format(filename))
+        try:
+            graph.write("{}.{}".format(filename, output_type), format=output_type)
+            tw.line("created {}.{}.".format(filename, output_type))
+        except Exception:
+            tw.line("grpahvis wasn't found in PATH")
+            graph.write(filename + ".dot")
+            tw.line("created {}.dot.".format(filename))
+            tw.line("You can convert it to a PNG using:\n\t'dot -Tpng {0}.dot -o {0}.png'".format(filename))
