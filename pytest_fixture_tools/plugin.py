@@ -121,17 +121,12 @@ def _show_fixture_duplicates_main(config, session):
 
 def pytest_runtest_setup(item):
     if item.config.option.fixture_graph and hasattr(item, "_fixtureinfo"):
-        curdir = py.path.local()
         # fixtures came from function parameters names
         data = dict()
         data['func_args'] = item._fixtureinfo.argnames, 'red'
         for fixture_name, fixture_data in list(item._fixtureinfo.name2fixturedefs.items()):
 
-            loc = getlocation(fixture_data[0].func, curdir)
-            if 'pytest_vgw' in loc:
-                color = 'yellow'
-            else:
-                color = 'green'
+            color = 'green'
             data[fixture_name] = fixture_data[0].argnames, color
 
         graph = pydot.Dot(graph_type='digraph')
@@ -155,7 +150,7 @@ def pytest_runtest_setup(item):
             graph.write("{}.{}".format(filename, output_type), format=output_type)
             tw.line("created {}.{}.".format(filename, output_type))
         except Exception:
-            tw.line("grpahvis wasn't found in PATH")
+            tw.line("graphvis wasn't found in PATH")
             graph.write(filename + ".dot")
             tw.line("created {}.dot.".format(filename))
             tw.line("You can convert it to a PNG using:\n\t'dot -Tpng {0}.dot -o {0}.png'".format(filename))
