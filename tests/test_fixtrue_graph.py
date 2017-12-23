@@ -2,7 +2,7 @@ import py
 
 
 def test_fixture_graph_created(testdir):
-    """Check that --show-fixture-duplicates will give us list of duplicates."""
+    """Check that --fixture-graph will create the graph .dot file"""
     sub1 = testdir.mkpydir("sub1")
     sub2 = testdir.mkpydir("sub1/sub2")
     sub1.join("conftest.py").write(py.code.Source("""
