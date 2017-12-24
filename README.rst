@@ -22,6 +22,9 @@ Installation
 Usage
 -----
 
+show-fixture-duplicates
+***********************
+
 If you have already installed ``pytest-fixture-tools`` plugin then you can use one of its commands.
 
 ``--show-fixture-duplicates`` - will collect all fixtures and print you a list of duplicates for each fixture.
@@ -47,6 +50,55 @@ Output can look like this:
     tests/fixtures/order.py:30
     tests/unit/api/conftest.py:261
 
+fixture-graph
+*************
+
+You can generate the usage fixture graph like that:
+
+.. sourcecode:: bash
+
+    # on windows gitbash as example
+    export PATH=$PATH:/c/Program\ Files\ \(x86\)/Graphviz2.38/bin/
+    pytest --fixture-graph -s
+
+    # or you can select the output direcotry like that:
+    pytest --fixture-graph --fixture-graph-output-dir=./test_output
+
+    # you can also change the output type of the graphs (any of graphvis supported outputs types):
+    pytest --fixture-graph --fixture-graph-type=jpg
+
+The output would be like that:
+
+.. sourcecode::
+
+   ============================= test session starts =============================
+   platform win32 -- Python 2.7.10, pytest-3.3.1, py-1.5.2, pluggy-0.6.0
+   rootdir: C:\Users\ifruchte\Projects\pytest-fixture-tools, inifile: tox.ini
+   plugins: pep8-1.0.6, cov-2.5.1, fixture-tools-1.0.0
+   collected 7 items
+
+   pytest_fixture_tools\__init__.py .                                       [ 14%]
+   pytest_fixture_tools\plugin.py .                                         [ 28%]
+   tests\__init__.py .                                                      [ 42%]
+   tests\conftest.py .                                                      [ 57%]
+   tests\test_fixture_duplicates.py .
+   -------------------------------- fixture-graph --------------------------------
+   created artifacts/fixture-graph-tests-test_fixture_duplicates.py__test_there_are_fixture_duplicates.png.
+   ============================= test session starts =============================
+   platform win32 -- Python 2.7.10, pytest-3.3.1, py-1.5.2, pluggy-0.6.0
+   rootdir: c:\users\ifruchte\appdata\local\temp\pytest-of-ifruchte\pytest-445\test_there_are_not_fixture_duplicates0, inifile:
+   plugins: pep8-1.0.6, cov-2.5.1, fixture-tools-1.0.0
+   collected 2 items
+
+   ======================== no tests ran in 0.06 seconds =========================
+   .s                                     [100%]
+
+   ===================== 6 passed, 1 skipped in 0.29 seconds =====================
+
+Final output, that can help with tests that depend on large amount of fixtures:
+
+.. image:: imgs/graph_example.png
+    :alt: alternate text
 
 Contact
 -------

@@ -1,10 +1,15 @@
 language: python
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "nightly"
 # command to install dependencies
 install:
   - pip install python-coveralls virtualenv
 # # command to run tests
-script: python setup.py test
-after_success:
+script:
   - pip install -r requirements-testing.txt -e .
   - py.test --cov=pytest_fixture_tools --cov-report=term-missing tests
   - coveralls
