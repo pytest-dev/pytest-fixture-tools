@@ -4,7 +4,7 @@ import py
 import os
 import errno
 
-from _pytest.python import getlocation
+from _pytest.compat import getlocation
 from collections import defaultdict
 
 import pydot
