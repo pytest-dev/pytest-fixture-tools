@@ -22,7 +22,7 @@ def test_fixture_graph_created(testdir):
     sub1.join("test_in_sub1.py").write("def test_1(arg1): pass")
     sub2.join("test_in_sub2.py").write("def test_2(arg1): pass")
 
-    result = testdir.runpytest_subprocess('--fixture-graph', '-s')
+    result = testdir.runpytest_subprocess('--fixture-graph', '-s', '--fixture-graph-output-type', 'dot')
 
     result.stdout.fnmatch_lines("created artifacts/fixture-graph-sub1-test_in_sub1.py__test_1.dot.")
     result.stdout.fnmatch_lines('created artifacts/fixture-graph-sub1-sub2-test_in_sub2.py__test_2.dot.')
