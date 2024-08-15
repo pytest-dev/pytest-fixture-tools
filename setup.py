@@ -6,7 +6,7 @@ from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
 
-version = '1.1.0'
+version = '1.2.0'
 
 
 class ToxTestCommand(TestCommand):
@@ -49,7 +49,7 @@ setup(
         'Topic :: Utilities',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3'
-    ] + [('Programming Language :: Python :: %s' % x) for x in '2.6 2.7 3.0 3.1 3.2 3.3'.split()],
+    ] + [('Programming Language :: Python :: %s' % x) for x in '3.8 3.9 3.10 3.11 3.12'.split()],
     cmdclass={'test': ToxTestCommand},
     install_requires=[
         'pytest', 'pydot', 'py'
