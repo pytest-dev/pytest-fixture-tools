@@ -37,10 +37,10 @@ def pytest_addoption(parser):
                     action="store_true", dest="fixture_graph", default=False,
                     help="create .dot fixture graph for each test")
     group.addoption('--fixture-graph-output-dir',
-                    action="store_true", dest="fixture_graph_output_dir", default="artifacts",
+                    action="store", dest="fixture_graph_output_dir", default="artifacts",
                     help="select the location for the output of fixture graph. defaults to 'artifacts'")
     group.addoption('--fixture-graph-output-type',
-                    action="store_true", dest="fixture_graph_output_type", default="png",
+                    action="store", dest="fixture_graph_output_type", default="png",
                     help="select the type of the output for the fixture graph. defaults to 'png'")
 
 
