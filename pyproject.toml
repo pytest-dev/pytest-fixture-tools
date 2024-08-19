@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pytest-fixture-tools"
+version = "1.2.0"
+description = "Plugin for pytest which provides tools for fixtures"
+dynamic = ["readme"]
+authors = [
+  { name = "Paylogic International", email = "developers@paylogic.com" },
+]
+license = {text = "MIT license"}
+classifiers = [
+  "Development Status :: 6 - Mature",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: POSIX",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: MacOS :: MacOS X",
+  "Topic :: Software Development :: Testing",
+  "Topic :: Software Development :: Libraries",
+  "Topic :: Utilities",
+  "Programming Language :: Python :: 2",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+dependencies = ["pytest", "pydot", "py"]
+
+[project.entry-points.pytest11]
+pytest-fixture-tools = "pytest_fixture_tools.plugin"
+
+[tool.setuptools]
+packages = ["pytest_fixture_tools"]
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.rst", "CHANGES.rst"], content-type = "text/x-rst"}
