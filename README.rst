@@ -65,7 +65,7 @@ You can generate the usage fixture graph like that:
     pytest --fixture-graph --fixture-graph-output-dir=./test_output
 
     # you can also change the output type of the graphs (any of graphvis supported outputs types):
-    pytest --fixture-graph --fixture-graph-type=jpg
+    pytest --fixture-graph --fixture-graph-output-type=jpg
 
 The output would be like that:
 
