@@ -91,7 +91,7 @@ def _show_fixture_duplicates_main(config, session):
                        else fm._arg2fixturedefs)
     for item in session.items:
         for argname in arg2fixturedefs:
-            fixturedefs = fm.getfixturedefs(argname, item.nodeid)
+            fixturedefs = fm.getfixturedefs(argname, item)
             assert fixturedefs is not None
             if not fixturedefs:
                 continue
