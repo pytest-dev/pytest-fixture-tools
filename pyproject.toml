@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytest-fixture-tools"
-version = "1.2.0"
+version = "1.2.1"
 description = "Plugin for pytest which provides tools for fixtures"
 dynamic = ["readme"]
 authors = [

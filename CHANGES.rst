@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+1.2.1
+_____
+
+* Fix typo in README.rst by @lebrice in https://github.com/pytest-dev/pytest-fixture-tools/pull/10
+* Fix #8 - Remove migrate setup.py to pyproject.toml by @ogajduse in https://github.com/pytest-dev/pytest-fixture-tools/pull/9
+* Fix getfixturedefs call by @MaksimKravchuk in https://github.com/pytest-dev/pytest-fixture-tools/pull/12
+
 1.2.0
 -----
 
