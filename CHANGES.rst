@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+1.2.2
+-----
+
+* Fix --fixture-graph with pytest 9.2 (use Node.nodeid) in https://github.com/pytest-dev/pytest-fixture-tools/pull/16
+* Fix --show-fixture-duplicates with pytest 9.2 in https://github.com/pytest-dev/pytest-fixture-tools/pull/19
+* Tighten duplicates test and fix docstring version in https://github.com/pytest-dev/pytest-fixture-tools/pull/20
+* Note: with pytest 9.2 and newer, --show-fixture-duplicates reports the fixture decorator line instead of the def line.
+
 1.2.1
 -----
 
