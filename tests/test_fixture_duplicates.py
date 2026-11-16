@@ -52,6 +52,7 @@ def test_there_are_fixture_duplicates(testdir):
 
     result = testdir.runpytest_subprocess('--show-fixture-duplicates', '-s')
 
-    # pytest >= 9.2 reports the decorator line, older versions the def line
-    result.stdout.fnmatch_lines('sub1/conftest.py:[45]')
-    result.stdout.fnmatch_lines('sub1/sub2/conftest.py:[45]')
+    # pytest >= 9.2 reports the decorator line, older versions decorator line + 1
+    line = 4 if pytest.version_tuple >= (9, 2) else 5
+    result.stdout.fnmatch_lines('sub1/conftest.py:{}'.format(line))
+    result.stdout.fnmatch_lines('sub1/sub2/conftest.py:{}'.format(line))
