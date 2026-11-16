@@ -77,6 +77,19 @@ def print_duplicates(argname, fixtures, previous_argname):
             tw.line(funcargspec)
 
 
+def _known_fixture_names(fm):
+    """Return the names of all fixtures registered in the fixture manager.
+
+    pytest keeps this in private attributes whose name changed over time:
+    ``_arg2fixturedefs`` (old), ``_arg2node2fixturedefs`` and
+    ``_arg2nodeid2fixturedefs`` (pytest >= 9.1).
+    """
+    names = set()
+    for attr in ("_arg2fixturedefs", "_arg2node2fixturedefs", "_arg2nodeid2fixturedefs"):
+        names.update(getattr(fm, attr, {}))
+    return sorted(names)
+
+
 def _show_fixture_duplicates_main(config, session):
     """Preparing fixture duplicates for output."""
     session.perform_collect()
@@ -86,9 +99,10 @@ def _show_fixture_duplicates_main(config, session):
 
     fixture_name = config.option.fixture_name
     available = defaultdict(list)
+    known_names = _known_fixture_names(fm)
     arg2fixturedefs = ([fixture_name]
-                       if fixture_name and fixture_name in fm._arg2fixturedefs
-                       else fm._arg2fixturedefs)
+                       if fixture_name and fixture_name in known_names
+                       else known_names)
     for item in session.items:
         for argname in arg2fixturedefs:
             fixturedefs = fm.getfixturedefs(argname, item)
@@ -100,7 +114,7 @@ def _show_fixture_duplicates_main(config, session):
                 loc = getlocation(fixturedef.func, curdir)
 
                 fixture = (
-                    len(fixturedef.baseid),
+                    len(getattr(fixturedef, "baseid", "")),
                     fixturedef.func.__module__,
                     curdir.bestrelpath(loc),
                     fixturedef
