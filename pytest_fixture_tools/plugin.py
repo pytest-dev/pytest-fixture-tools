@@ -143,7 +143,7 @@ def pytest_runtest_setup(item):
         log_dir = item.config.option.fixture_graph_output_dir
         output_type = item.config.option.fixture_graph_output_type
         mkdir_recursive(log_dir)
-        filename = "{0}/fixture-graph-{1}".format(log_dir, item._nodeid.replace(":", "_").replace("/", "-"))
+        filename = "{0}/fixture-graph-{1}".format(log_dir, item.nodeid.replace(":", "_").replace("/", "-"))
         tw.line()
         tw.sep("-", "fixture-graph")
         try:
