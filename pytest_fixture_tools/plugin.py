@@ -81,8 +81,8 @@ def _known_fixture_names(fm):
     """Return the names of all fixtures registered in the fixture manager.
 
     pytest keeps this in private attributes whose name changed over time:
-    ``_arg2fixturedefs`` (old), ``_arg2node2fixturedefs`` and
-    ``_arg2nodeid2fixturedefs`` (pytest >= 9.1).
+    ``_arg2fixturedefs`` (pytest < 9.2), ``_arg2node2fixturedefs`` and
+    ``_arg2nodeid2fixturedefs`` (pytest >= 9.2).
     """
     names = set()
     for attr in ("_arg2fixturedefs", "_arg2node2fixturedefs", "_arg2nodeid2fixturedefs"):
